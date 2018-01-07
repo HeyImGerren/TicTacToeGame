@@ -47,4 +47,51 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+//TEST CODE FOR TESTING DATABASE 
+// const deckTable = require("./db/deck");
+// let cardObject = {
+//   pipvalue: deckContent.deck[0].pipvalue,
+//   pipface: deckContent.deck[0].pipface,
+//   pipsuit: deckContent.deck[0].pipsuit, 
+//   image: deckContent.deck[0].image,
+//   imageBack: "blackjack/assets/cardsImages/red_back.png"
+// };
+//deckTable.addCard(cardObject); 
+//deckTable.deleteCard(7);
+
+const playerTable = require("./db/players");
+const gamesTable = require("./db/games");
+
+let gameObject = {
+  numberofplayers: 2
+};
+
+// Here is how you create a game row and create a player row that links to the game row
+// gamesTable
+//   .addGame( gameObject )
+//   .then( result => {
+//     let playerObject = {
+//       gamesfk: result.id, 
+//       winner: true,
+//       symbol: 'x',
+//       myturn: true
+//     };
+//     playerTable
+//       .addPlayer( playerObject )
+//       .then( playerResult => {
+//         console.log( playerResult.id );
+//       })
+//       .catch( error => console.log( "ERROR: ", error ));
+//   })
+//   .catch((error) => {
+//     console.log(error); 
+//   });
+
+//TESTING DELETE
+// playerTable.deletePlayer(3)
+// .catch(error => console.log(error)); 
+
+// gamesTable.deleteGame(5)
+// .catch(error => console.log(error));
+
 module.exports = app;

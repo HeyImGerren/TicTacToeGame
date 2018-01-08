@@ -1,8 +1,8 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   var playermoves = sequelize.define('playermoves', {
-    row: DataTypes.INTEGER,
-    column: DataTypes.INTEGER,
+    rowPosition: DataTypes.INTEGER,
+    columnPosition: DataTypes.INTEGER,
     playerfk: DataTypes.INTEGER
   }, {
     classMethods: {

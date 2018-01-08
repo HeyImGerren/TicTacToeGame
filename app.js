@@ -50,12 +50,16 @@ app.use(function(err, req, res, next) {
 //TEST CODE FOR TESTING DATABASE 
 const playersTable = require("./db/players");
 const gamesTable = require("./db/games");
+const playerMovesTable = require("./db/playermoves");
 
 let gameObject = {
   numberofplayers: 2
 };
 
-// Here is how you create a game row and create a player row that links to the game row
+
+
+//TESTING ADD
+//Here is how you create a game row and create a player row that links to the game row
 // gamesTable
 //   .addGame( gameObject )
 //   .then( result => {
@@ -76,10 +80,21 @@ let gameObject = {
 //     console.log(error); 
 //   });
 
-//gamesTable.updateNumberOfPlayers(8, 6);
-// gamesTable
-//   .readGame( 6 )
-//   .then( gameResult => console.log( "id: " + gameResult.id + ", # of Players: " + gameResult.numberofplayers)); 
+playersTable
+  .readPlayer(1)
+  .then( playerResult => {
+    let playerMoveObject = {
+      rowPosition: 1,
+      columnPosition: 1,
+      playerfk: playerResult.id
+    };
+    
+    playerMovesTable
+      .addPlayerMove( playerMoveObject )
+      .then( ( result ) => console.log( "Here is the addPlayMoveResult: " + result.id ) )
+      .catch( error => console.log( "ERROR: ", error ) );
+  })
+  .catch( error => console.log( "Error: ", error ) );
 
 //TESTING DELETE
 // playersTable.deletePlayer(3)
@@ -100,6 +115,11 @@ let gameObject = {
 //   .updatePlayerTurn( false, 4 )
 //   .then( () => console.log("Updated myturn successfully!" ) )
 //   .catch( error => console.log( "ERROR: ", error ) );
+//gamesTable.updateNumberOfPlayers(8, 6);
+// gamesTable
+//   .readGame( 6 )
+//   .then( gameResult => console.log( "id: " + gameResult.id + ", # of Players: " + gameResult.numberofplayers)); 
+
 
 //TESTING READ
 // playersTable

@@ -80,21 +80,21 @@ let gameObject = {
 //     console.log(error); 
 //   });
 
-playersTable
-  .readPlayer(1)
-  .then( playerResult => {
-    let playerMoveObject = {
-      rowPosition: 1,
-      columnPosition: 1,
-      playerfk: playerResult.id
-    };
+// playersTable
+//   .readPlayer(1)
+//   .then( playerResult => {
+//     let playerMoveObject = {
+//       rowPosition: 1,
+//       columnPosition: 1,
+//       playerfk: playerResult.id
+//     };
     
-    playerMovesTable
-      .addPlayerMove( playerMoveObject )
-      .then( ( result ) => console.log( "Here is the addPlayMoveResult: " + result.id ) )
-      .catch( error => console.log( "ERROR: ", error ) );
-  })
-  .catch( error => console.log( "Error: ", error ) );
+//     playerMovesTable
+//       .addPlayerMove( playerMoveObject )
+//       .then( ( result ) => console.log( "Here is the addPlayMoveResult: " + result.id ) )
+//       .catch( error => console.log( "ERROR: ", error ) );
+//   })
+//   .catch( error => console.log( "Error: ", error ) );
 
 //TESTING DELETE
 // playersTable.deletePlayer(3)
@@ -129,5 +129,11 @@ playersTable
 //       " Winner?: " + playerResult.winner + 
 //       " Player Symbol: " + playerResult.symbol +
 //       " Player Turn?: " + playerResult.myturn ));
+
+//TESTING RETURNING MULTIPLE ROWS 
+// playerMovesTable
+//   .getPlayerMoves( 1 )
+//   .then( result => console.log( result.length ) )
+//   .catch( error => console.log( "couldn't return player moves!" ) );
 
 module.exports = app;

@@ -1,4 +1,4 @@
 module.exports = {
-  addPlayerMove: require("./playermoves/addPlayerMove")
-  //getPlayerMoves: require("./playermoves/getPlayerMoves")
+  addPlayerMove: require("./playermoves/addPlayerMove"),
+  getPlayerMoves: require("./playermoves/getPlayerMoves")
 };

@@ -48,7 +48,7 @@ app.use(function(err, req, res, next) {
 });
 
 //TEST CODE FOR TESTING DATABASE 
-const playerTable = require("./db/players");
+const playersTable = require("./db/players");
 const gamesTable = require("./db/games");
 
 let gameObject = {
@@ -65,7 +65,7 @@ let gameObject = {
 //       symbol: 'x',
 //       myturn: true
 //     };
-//     playerTable
+//     playersTable
 //       .addPlayer( playerObject )
 //       .then( playerResult => {
 //         console.log( playerResult.id );
@@ -82,9 +82,32 @@ let gameObject = {
 //   .then( gameResult => console.log( "id: " + gameResult.id + ", # of Players: " + gameResult.numberofplayers)); 
 
 //TESTING DELETE
-// playerTable.deletePlayer(3)
+// playersTable.deletePlayer(3)
 // .catch(error => console.log(error)); 
 // gamesTable.deleteGame(5)
 // .catch(error => console.log(error));
+
+//TESTING UPDATE 
+// playersTable
+//   .updateWinner( true, 4 )
+//   .then(() => console.log("updated winner successfully!!"))
+//   .catch( error => console.log(error));
+// playersTable
+//   .updateSymbol( 'o', 4 )
+//   .then( () => console.log("Updated symbol successfully!" ) )
+//   .catch( error => console.log( "ERROR: ", error ) );
+// playersTable
+//   .updatePlayerTurn( false, 4 )
+//   .then( () => console.log("Updated myturn successfully!" ) )
+//   .catch( error => console.log( "ERROR: ", error ) );
+
+//TESTING READ
+// playersTable
+//   .readPlayer( 4 )
+//   .then( ( playerResult ) => 
+//     console.log("Games fk: " + playerResult.gamesfk + 
+//       " Winner?: " + playerResult.winner + 
+//       " Player Symbol: " + playerResult.symbol +
+//       " Player Turn?: " + playerResult.myturn ));
 
 module.exports = app;

@@ -1,0 +1,23 @@
+extends form-layout
+
+block content
+  div.box
+    div.login 
+      form( method = "POST" action = "register-user" )
+        div.form-group 
+          label( for = "email" ) Email
+          input( type = "text" id = "email" placeholder = "Email Address" name = "email" )
+        
+        div.form-group 
+          label( for = "userName" ) Username 
+          input( type = "text" id = "userName" placeholder = "Username" name = "userName" )
+        
+        div.form-group 
+          label( for = "password" ) Password
+          input( type = "text" id = "password" placeholder = "Password" name = "password" )
+        
+        div.form-group 
+          label( for = "confirmPassword" ) Re-type Password
+          input( type = "text" id = "confirmPassword" placeholder = "Re-type Password" name = "confirmPassword" )
+      
+        button( type = "submit" id = "register-button" ) Register!

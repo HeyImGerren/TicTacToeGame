@@ -11,7 +11,7 @@ const usersTable = require("../db/users");
 router
   .get( '/', function( request, response, next ) {
     response
-      .render('./account-forms/login', { title: 'Login' });
+      .render('./account-forms/login', { title: 'Home' });
 });
 
 router
@@ -20,6 +20,14 @@ router
       .render('./account-forms/registration', { title: 'Registration'});
 });
 
+router
+  .post( '/profile', function( request, response, next ) {
+    console.log(request.body.username);
+    console.log(request.body.password);
+    response
+      .render('./profile', { title: 'Profile' });
+  });
+
 router  
   .post( '/register-user', function( request, response, next ) {
     request
@@ -27,16 +35,16 @@ router
       .isEmail();
     request
       .checkBody( "email", "Email address must be between 4-100 characters! Please enter a valid email address!" )
-      .len( 4,100 ); 
+      .len( 4, 100 ); 
     request
       .checkBody( "userName", "Username cannot be empty!" )
       .notEmpty(); 
     request 
       .checkBody( "userName", "Username must be between 4-15 characters long!" )
-      .len( 4,15 );
+      .len( 4, 15 );
     request
       .checkBody( "password", "Password must be between 6-100 characters long!" )
-      .len( 6,100 );
+      .len( 6, 100 );
     request
       .checkBody( "confirmPassword", "Passwords do not match! Please try again." )
       .equals( request.body.password );   

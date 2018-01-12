@@ -11,6 +11,8 @@ var bodyParser = require('body-parser');
 var expressValidator = require('express-validator');
 var bcrypt = require('bcrypt');
 
+//Authentication Packages
+var session = require('express-session'); 
 
 var index = require('./routes/index');
 var users = require('./routes/users');

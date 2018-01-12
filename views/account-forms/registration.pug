@@ -1,13 +1,11 @@
 extends form-layout
 
 block content
-
   div.errors
     ul 
       if errors
         each error in errors
           li= error.msg
-
   div.box
     div.login 
       form( method = "POST" action = "register-user" )

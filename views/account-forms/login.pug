@@ -6,13 +6,13 @@ block content
 
   div.box
     div.login 
-      form( method = "POST" action = "login" )
+      form( method = "POST" action = "profile" )
         div.form-group
           label( for = "username" ) Username
           input( type = "text" id = "username" placeholder = "Username" name = "username" )
         
         div.form-group 
           label( for = "password" ) Password
-          input( type = "text" id = "password" placeholder = "Password" name = "password" )
+          input( type = "password" id = "password" placeholder = "Password" name = "password" )
         
         button( type = "submit" id = "login-button" ) Login

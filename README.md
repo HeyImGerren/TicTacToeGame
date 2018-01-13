@@ -7,5 +7,5 @@
 - refactor app.js and possibly routes/index.js.
 - add in password constraints that require users to have 1 capital letter, a number, and some kind of symbol in order to sign up (use regex).  
 
-### This is the command to use to connect to the sessions tables for my computer
-- psql -U postgres tic tac toe mydatabase < node_modules/connect-pg-simple/table.sql
+### This is the command to use get the sessions tables f setup for my computer
+- psql -U postgres tictactoe < node_modules/connect-pg-simple/table.sql

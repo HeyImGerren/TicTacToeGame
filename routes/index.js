@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var expressValidator = require('express-validator');
+var passport = require('passport');
 
 var bcrypt = require('bcrypt');
 const saltRounds = 10; 
@@ -10,6 +11,8 @@ const usersTable = require("../db/users");
 /* GET home page. */
 router
   .get( '/', function( request, response, next ) {
+    console.log( request.user );
+    console.log( request.isAuthenticated() );
     response
       .render('./account-forms/login', { title: 'Home' });
 });
@@ -22,8 +25,8 @@ router
 
 router
   .post( '/profile', function( request, response, next ) {
-    console.log(request.body.username);
-    console.log(request.body.password);
+    // console.log(request.body.username);
+    // console.log(request.body.password);
     response
       .render('./profile', { title: 'Profile' });
   });
@@ -72,12 +75,27 @@ router
       
           usersTable
             .addUser( userObject )
-            .then( () => { 
-              response
-                .render( './account-forms/login');
-            });  
+            .then( ( userResult ) => {
+              const userID = userResult.id; 
+              request.login( userID, function( error ) {
+                response  
+                  .redirect( '/' );
+              });
+              //console.log( "This is the user's ID: ", userResult.id ); 
+              // response
+              //   .render( './account-forms/login');
+            })
+            .catch( error => console.log( "ERROR: ", error ));   
         })
     }
   });
+
+passport.serializeUser( function( userID, done ) {
+  done( null, userID );
+});
+
+passport.deserializeUser( function( userID, done ) {
+  done( null, userID );
+}); 
 
 module.exports = router;

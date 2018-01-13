@@ -13,6 +13,7 @@ var bcrypt = require('bcrypt');
 
 //Authentication Packages
 var session = require('express-session'); 
+var passport = require('passport'); 
 
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -33,6 +34,15 @@ app.use( expressValidator() );
 
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(session( {
+  store: new( require('connect-pg-simple')( session ))(),
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use('/', index);
 app.use('/users', users);

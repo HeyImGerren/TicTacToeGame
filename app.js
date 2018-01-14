@@ -14,6 +14,8 @@ var bcrypt = require('bcrypt');
 //Authentication Packages
 var session = require('express-session'); 
 var passport = require('passport'); 
+var postgresStore = require('connect-pg-simple')( session );
+var sessionStore = new postgresStore();
 
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -36,7 +38,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(session( {
-  store: new( require('connect-pg-simple')( session ))(),
+  //store: new( require('connect-pg-simple')( session ))(),
+  store: sessionStore,
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false

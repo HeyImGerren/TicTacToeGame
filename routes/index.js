@@ -11,8 +11,8 @@ const usersTable = require("../db/users");
 /* GET home page. */
 router
   .get( '/', function( request, response, next ) {
-    console.log( request.user );
-    console.log( request.isAuthenticated() );
+    // console.log( request.user );
+    // console.log( request.isAuthenticated() );
     response
       .render('./account-forms/login', { title: 'Home' });
 });
@@ -24,7 +24,7 @@ router
 });
 
 router
-  .post( '/profile', function( request, response, next ) {
+  .post( '/profile', authenticationMiddleware(), function( request, response, next ) {
     // console.log(request.body.username);
     // console.log(request.body.password);
     response
@@ -97,5 +97,18 @@ passport.serializeUser( function( userID, done ) {
 passport.deserializeUser( function( userID, done ) {
   done( null, userID );
 }); 
+
+function authenticationMiddleware() {  
+	return( request, response, next ) => {
+		console.log(`request.session.passport.user: ${JSON.stringify(request.session.passport)}`);
+
+    if( request.isAuthenticated() ) {
+      return next();
+    }
+    //think of this as the else statement, so it'll go here if the user is not authenticated
+    response
+      .redirect('/registration');
+  };
+};
 
 module.exports = router;

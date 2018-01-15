@@ -23,11 +23,22 @@ router
       .render('../views/account-forms/login', { title: 'Login' });
   });
 
+  router  
+    .post( '/login', passport.authenticate( 'local', {
+      successRedirect: '/profile',
+      failureRedirect: '/login'
+    }));
+
 router
   .get( '/registration', function( request, response, next ) {
     response
       .render('./account-forms/registration', { title: 'Registration'});
 });
+
+router
+  .get( '/profile', function( request, response, next ) {
+    response.render('./profile', { title: 'Profile' }); 
+  });
 
 router
   .post( '/profile', authenticationMiddleware(), function( request, response, next ) {

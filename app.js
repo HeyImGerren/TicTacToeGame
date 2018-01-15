@@ -9,13 +9,15 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var expressValidator = require('express-validator');
-var bcrypt = require('bcrypt');
+
 
 //Authentication Packages
 var session = require('express-session'); 
 var passport = require('passport'); 
 var postgresStore = require('connect-pg-simple')( session );
+var localStrategy = require('passport-local').Strategy; 
 var sessionStore = new postgresStore();
+var bcrypt = require('bcrypt');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -49,6 +51,34 @@ app.use(passport.session());
 
 app.use('/', index);
 app.use('/users', users);
+
+passport
+  .use( new localStrategy(
+  function( username, password, done ) {
+    const usersTable = require("./db/users");
+
+    usersTable
+      .readUserByUsername( username )
+      .then( usersResult => {
+        const returnedUsername = usersResult.username;
+        const returnedPassword = usersResult.password; 
+        const returnedUserID = usersResult.id; 
+
+        bcrypt
+          .compare( password, returnedPassword, function( error, result ) {
+            if( result === true ) {
+              return done( null, returnedUserID );
+            } else {
+              return done( null, false );
+            }
+          });
+      })
+      .catch( error => {
+        console.log( "ERROR: ", error )
+        
+        return done( null, false );
+      });
+  }));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

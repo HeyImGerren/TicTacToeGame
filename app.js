@@ -49,6 +49,11 @@ app.use(session( {
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use( function( request, response, next ) {
+  response.locals.isAuthenticated = request.isAuthenticated();
+  next(); 
+});
+
 app.use('/', index);
 app.use('/users', users);
 

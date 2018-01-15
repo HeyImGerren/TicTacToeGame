@@ -14,8 +14,14 @@ router
     // console.log( request.user );
     // console.log( request.isAuthenticated() );
     response
-      .render('./account-forms/login', { title: 'Home' });
+      .render('../views/home', { title: 'Home' });
 });
+
+router
+  .get( '/login', function( request, response, next ) {
+    response  
+      .render('../views/account-forms/login', { title: 'Login' });
+  });
 
 router
   .get( '/registration', function( request, response, next ) {

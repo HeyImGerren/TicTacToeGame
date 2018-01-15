@@ -23,11 +23,21 @@ router
       .render('../views/account-forms/login', { title: 'Login' });
   });
 
-  router  
-    .post( '/login', passport.authenticate( 'local', {
-      successRedirect: '/profile',
-      failureRedirect: '/login'
-    }));
+router  
+  .post( '/login', passport.authenticate( 'local', {
+    successRedirect: '/profile',
+    failureRedirect: '/login'
+  }));
+
+router  
+  .get( '/logout', function( request, response ) {
+    request.logout();
+    request.session.destroy( () => {
+      response.clearCookie( "connect.sid" );
+      response.redirect('/');
+    });
+});
+  
 
 router
   .get( '/registration', function( request, response, next ) {

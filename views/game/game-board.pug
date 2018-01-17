@@ -1,0 +1,19 @@
+extends game-room-layout.pug
+
+block content 
+  p Welcome to the game room! 
+  div.box
+    table( id = "board" name = "board" ).board
+      tr
+        td( id = "one")
+        td( id = "two")
+        td( id = "three")
+      tr
+        td( id = "four")
+        td( id = "five")
+        td( id = "six")
+      tr
+        td( id = "seven")
+        td( id = "eight")
+        td( id = "nine")
+  script(src="/javascript/game-board.js")

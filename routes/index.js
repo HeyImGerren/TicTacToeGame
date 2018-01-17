@@ -17,6 +17,13 @@ router
       .render('../views/home', { title: 'Home' });
 });
 
+//DELETE THIS EVENTUALLY, JUST TRYING TO TEST THE GAME ROOM!!!
+router
+  .get( '/gametester', function( request, response, next ) {
+    response
+      .render('../views/game/game-board', { title: 'Game Test' });
+  });
+
 router
   .get( '/login', function( request, response, next ) {
     response  

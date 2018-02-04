@@ -7,6 +7,8 @@ var bcrypt = require('bcrypt');
 const saltRounds = 10; 
 
 const usersTable = require("../db/users");
+const gamesTable = require("../db/games");
+const playersTable = require("../db/players");
 
 /* GET home page. */
 router
@@ -23,6 +25,68 @@ router
     response
       .render('../views/game/game-board', { title: 'Game Test' });
   });
+
+//ALSO DELETE THIS POSSIBLY
+//so now that we figured out to access the database from the client side
+//we need to figure out how to access the data being sent over 
+//nvm it's in request.body
+router
+  .post( '/move', function( request, response, next ) {
+    console.log(request.body.rowPosition);
+  //   const userObject = {
+  //     username: "ajaxaxaxax",
+  //     password: "password"
+  //   };
+
+  //   usersTable
+  //     .addUser(userObject);
+  });
+
+  //ADDING IN THE GAME ROOM
+  router
+    .post( '/gamestart', function( request, response, next ) {
+      console.log("made it into the game room"); 
+      const userID = request.session.passport.user;
+      console.log(userID);
+
+      const gameObject = {
+        numberofplayers: 1
+      };
+
+      gamesTable
+        .addGame( gameObject )
+        .then( gameResult => {
+          console.log(gameResult.id);
+          const gameID = gameResult.id; 
+          const playerObject = {
+            gamesfk: gameID,
+            winner: false,
+            symbol: 'x',
+            myturn: true
+          };
+          playersTable
+            .addPlayer( playerObject )
+            .then( playerResult => {
+              console.log("Added in player and created game!");
+              // return response
+              //   .redirect("/game");
+        
+            })
+            .catch( error => console.log(error));
+        })
+        .catch( error => console.log(error));
+     
+        
+    });
+
+  router  
+    .get('/game', function( request, response, next ){
+      //window.location.href = 1600;
+      console.log("ATTEMPTING TO RENDER THE GAME BOARD");
+      response
+      .render("../views/game/game-board", { title: 'Game Test' });
+      
+    });
 
 router
   .get( '/login', function( request, response, next ) {

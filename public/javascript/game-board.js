@@ -1,8 +1,29 @@
 $("document").ready( function() {
+
   //keep in mind this gets printed in the console on the client-side
+  //window.location.href = "/game";
+
   console.log("I think it's working!");
   $("#one").click(function(){
-    $(this).css("background-color", "red");
+    $(this).css("background-color", "red"); 
+    const data = {
+      rowPosition: 1, 
+      columnPosition: 1,
+      //you actually don't have this information,
+      //you would have to query it once the POST request goes through
+      //to the server side
+      playerfk: 1
+    };
+
+    $.ajax({
+      type: "POST", 
+      url: "http://localhost:3000/move",
+      data: data,
+      success: alert('Success!'),
+      error: function() {
+        console.log('ERROR!');
+      }
+    });  
   });
 
   $("#two").click(function(){

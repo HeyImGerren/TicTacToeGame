@@ -54,6 +54,7 @@ app.use( function( request, response, next ) {
   next(); 
 });
 
+
 app.use('/', index);
 app.use('/users', users);
 

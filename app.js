@@ -113,12 +113,39 @@ let gameObject = {
   numberofplayers: 2
 };
 
+let winningConditionsMap = new Map();
 
-let box1 = [1,1];
-let box2 = [1,2];
-let box3 = [1,3];
-let playerMoves = [ box1, box2, box3 ];
-let winConditions1 = [1,1];
+let condition1 = 'condition1';
+let condition2 = 'condition2';
+let condition3 = 'condition3';
+let condition4 = 'condition4';
+let condition5 = 'condition5';
+let condition6 = 'condition6';
+let condition7 = 'condition7';
+let condition8 = 'condition8';
+
+winningConditionsMap.set(1, [1,2,3] );
+winningConditionsMap.set(2, [4,5,6] );
+winningConditionsMap.set(3, [7,8,9] );
+winningConditionsMap.set(4, [1,4,7] );
+winningConditionsMap.set(5, [2,5,8] );
+winningConditionsMap.set(6, [3,6,9] );
+winningConditionsMap.set(7, [1,5,9] );
+winningConditionsMap.set(8, [3,5,7] );
+
+const testWinner = require("./engine_functions/checkForWinner");
+let myArray = [3,5,7];
+
+if( testWinner(myArray) ) {
+  console.log("WINNER!");
+} else {
+  console.log("LOSER");
+}
+//console.log(winningConditionsMap.size);
+//this is how you would check if the player's array of moves matches any of
+//the win conditions
+//console.log(winningConditionsMap.get(1).includes(2));
+
 //console.log(playerMoves.includes(box3));
 //TESTING ADD
 //Here is how you create a game row and create a player row that links to the game row

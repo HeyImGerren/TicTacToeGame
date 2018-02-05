@@ -8,7 +8,7 @@ $( "document" ).ready( function() {
     $.ajax({
       type: "POST",
       url: "http://localhost:3000/gamestart",
-      success: alert('YOU DID IT!'),
+      success: console.log("creating game!"),
       error: function() {
         console.log("error in game post");
       }

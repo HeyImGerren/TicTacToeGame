@@ -3,8 +3,8 @@ const database = require("../index");
 //^^ FIXED, the problem was that "column" is a reserved word so you can't
 //just name a column "column"
 const INSERT_PLAYER_MOVE_QUERY = `INSERT INTO playermoves
-  ("rowPosition","columnPosition",playerfk,"createdAt","updatedAt")
-  VALUES($1,$2,$3,$4,$5)
+  (box,playerfk,"createdAt","updatedAt")
+  VALUES($1,$2,$3,$4)
   RETURNING id`;
 
 const addPlayerMove = playerMoveObject => {
@@ -12,8 +12,7 @@ const addPlayerMove = playerMoveObject => {
   playerMoveObject[ "createdAt" ] = currentDate;
   playerMoveObject[ "updatedAt" ] = currentDate;
 
-  const VALUES = [ playerMoveObject.rowPosition,
-    playerMoveObject.columnPosition,
+  const VALUES = [ playerMoveObject.box,
     playerMoveObject.playerfk,
     playerMoveObject.createdAt,
     playerMoveObject.updatedAt ];

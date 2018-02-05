@@ -9,6 +9,7 @@ const saltRounds = 10;
 const usersTable = require("../db/users");
 const gamesTable = require("../db/games");
 const playersTable = require("../db/players");
+const playerMoveTable = require("../db/playermoves");
 
 /* GET home page. */
 router
@@ -31,15 +32,19 @@ router
 //we need to figure out how to access the data being sent over 
 //nvm it's in request.body
 router
-  .post( '/move', function( request, response, next ) {
-    console.log(request.body.rowPosition);
-  //   const userObject = {
-  //     username: "ajaxaxaxax",
-  //     password: "password"
-  //   };
+  .post( '/playermove', function( request, response, next ) {
+    // let row = request.body.rowPosition;
+    // let column = request.body.columnPosition;
+    let boxClicked = request.body.box;
+    const userID = request.session.passport.user;
 
-  //   usersTable
-  //     .addUser(userObject);
+    const playerMoveObject = {
+      box: boxClicked,
+      playerfk: userID,
+    };
+
+    playerMoveTable
+      .addPlayerMove(playerMoveObject);
   });
 
   //ADDING IN THE GAME ROOM
@@ -82,7 +87,7 @@ router
   router  
     .get('/game', function( request, response, next ){
       //window.location.href = 1600;
-      console.log("ATTEMPTING TO RENDER THE GAME BOARD");
+      //console.log("ATTEMPTING TO RENDER THE GAME BOARD");
       response
       .render("../views/game/game-board", { title: 'Game Test' });
       

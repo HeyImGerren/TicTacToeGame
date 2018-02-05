@@ -114,7 +114,12 @@ let gameObject = {
 };
 
 
-
+let box1 = [1,1];
+let box2 = [1,2];
+let box3 = [1,3];
+let playerMoves = [ box1, box2, box3 ];
+let winConditions1 = [1,1];
+console.log(playerMoves.includes(box3));
 //TESTING ADD
 //Here is how you create a game row and create a player row that links to the game row
 // gamesTable

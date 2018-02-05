@@ -8,10 +8,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      rowPosition: {
-        type: Sequelize.INTEGER
-      },
-      columnPosition: {
+      box: {
         type: Sequelize.INTEGER
       },
       playerfk: {

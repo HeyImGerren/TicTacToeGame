@@ -2,28 +2,44 @@ $("document").ready( function() {
 
   //keep in mind this gets printed in the console on the client-side
   //window.location.href = "/game";
-
-  console.log("I think it's working!");
+  //console.log("I think it's working!");
   $("#one").click(function(){
-    $(this).css("background-color", "red"); 
+    // $(this).css("background-color", "red"); 
+    // $('myOjbect').css('background-image', 'url(' + imageUrl + ')');
+    // let imageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSR3fEye3wM7QZ1oZD011BoMSuo6FPmfFuo2MUVuGPH0J8mvtsd";
+    // $('#one').css('background-image', 'url(' + imageUrl + ')');
+    // $('#one').css('width', '100%');
+    // $('#one').css('height', '100%');
+    // $('#one').css('display', 'block');
+    
     const data = {
-      rowPosition: 1, 
-      columnPosition: 1,
+      box: 1
       //you actually don't have this information,
       //you would have to query it once the POST request goes through
       //to the server side
-      playerfk: 1
+      //playerfk: 1
     };
 
     $.ajax({
       type: "POST", 
-      url: "http://localhost:3000/move",
+      url: "http://localhost:3000/playermove",
       data: data,
-      success: alert('Success!'),
+      //remember that you can do a function call here,
+      //maybe on success have it access the div and throw in
+      //a picture of an x or an o there. 
+      //the problem is, how do you know which symbol the player is? 
+      //perhaps this is where sockets will come in handy,
+      //when the player makes a move, on the router side we can query their symbol
+      //once we query their symbol we can do emit and have the symbol inside
+      //of the body of the emit?  
+      success: null,
       error: function() {
         console.log('ERROR!');
       }
-    });  
+    })
+
+
+
   });
 
   $("#two").click(function(){
@@ -32,18 +48,4 @@ $("document").ready( function() {
     //For example, when a user clicks this box, i want to send the
     $(this).css("background-color", "black");
   });
-
-  //this ajax call works!!!, I think we'll be using 
-  //$.post to be doing shit, but I'll figure that out later. 
-  // $.get("/javascript/game-board.js", function(data, status){
-  //   alert("Data: " + data + "\nStatus: " + status );
-  // });
-
-  //TODO: 
-  // Actually create the game room because now that we know how to do
-  //client-side js and we know that jquery and ajax calls work
-  //we need to figure out how to access the game room id, the user id, and 
-  //the player move because we'll probably be sending those 3 arguments into 
-  //the $.post() body in order to send that shit to the server 
-  //in order to make the "player move" action happen. 
 });
